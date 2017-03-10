@@ -33,17 +33,22 @@ $(document).ready(function() {
             //do division
         }
         // what to do if no operator ERROR
-        else if (getOperators[0]=== '+'){
-          let operands = equalsInput.split('+')
-          // console.log("operands", operands);
-          let firstOperand = parseInt(operands[0])
-          let secondOperand = parseInt(operands[1])
-          let sum = $('<span>').text(firstOperand + secondOperand)
-          clear()
-          sum.appendTo('#screen')
-        }
-        else if (getOperators[0] === '-'){
-
+        else if (getOperators[0] === '+') {
+            let operands = equalsInput.split('+')
+            // console.log("operands", operands);
+            let firstOperand = parseInt(operands[0])
+            let secondOperand = parseInt(operands[1])
+            let sum = $('<span>').text(firstOperand + secondOperand)
+            clear()
+            sum.appendTo('#screen')
+        } else if (getOperators[0] === '-') {
+            let operands = equalsInput.split('-')
+            // console.log("operands", operands);
+            let firstOperand = parseInt(operands[0])
+            let secondOperand = parseInt(operands[1])
+            let difference = $('<span>').text(firstOperand - secondOperand)
+            clear()
+            difference.appendTo('#screen')
         }
 
         console.log(getOperators);
