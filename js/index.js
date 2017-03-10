@@ -3,12 +3,18 @@ $(document).ready(function() {
     function clear() {
         $('#screen').children().remove()
     }
+    //operator function
+    function operation(equalsInput) {
+        console.log(equalsInput);
+        console.log(eval(equalsInput))
+        let answer = $('<span>').text(`${eval(equalsInput)}`)
+        clear()
+        answer.appendTo('#screen')
+    }
+
     // equals button function
     function equals(equalsInput) {
-        // .prevUntil() to specify text before an opperator
-        // .nextUntil() for after an opperator
-        // .closest()
-        //iterate through input object
+        console.log(equalsInput);
 
         let getOperators = equalsInput.match(/\W/gi)
         let getMultOp = equalsInput.match(/x/gi)
@@ -21,34 +27,26 @@ $(document).ready(function() {
         if (getMultOp !== null && getOperators === null && getMultOp.length < 2) {
             getOperators = []
             getOperators.push(getMultOp[0])
-            mult = getMultOp[0].replace('x', '*')
+            mult = equalsInput.replace('x', '*')
             // do multiplication
+            operation(mult)
         } else if ((getMultOp !== null && getOperators !== null) || (getMultOp !== null && getMultOp.length > 1) || getOperators.length > 1) {
             // getOperators.push(getMultOp[0])
             clear()
             let operatorError = $('<span>').attr('id', "operatorError").text('OPERATOR ERROR')
             operatorError.appendTo('#screen')
         } else if (getDivOp !== null) {
-            divide = getDivOp[0].replace('÷', '/')
+            divide = equalsInput.replace('÷', '/')
             //do division
+          operation(divide)
+
         }
         // what to do if no operator ERROR
         else if (getOperators[0] === '+') {
-            let operands = equalsInput.split('+')
-            // console.log("operands", operands);
-            let firstOperand = parseInt(operands[0])
-            let secondOperand = parseInt(operands[1])
-            let sum = $('<span>').text(firstOperand + secondOperand)
-            clear()
-            sum.appendTo('#screen')
+            operation(equalsInput)
+
         } else if (getOperators[0] === '-') {
-            let operands = equalsInput.split('-')
-            // console.log("operands", operands);
-            let firstOperand = parseInt(operands[0])
-            let secondOperand = parseInt(operands[1])
-            let difference = $('<span>').text(firstOperand - secondOperand)
-            clear()
-            difference.appendTo('#screen')
+            operation(equalsInput)
         }
 
         console.log(getOperators);
@@ -72,7 +70,7 @@ $(document).ready(function() {
 
 
             console.log(typeof equalsInput);
-            console.log(equalsInput);
+            console.log("equalsInput", equalsInput);
             equals(equalsInput)
         }
 
